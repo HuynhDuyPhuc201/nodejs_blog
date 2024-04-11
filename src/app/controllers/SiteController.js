@@ -1,16 +1,18 @@
 // file site dùng để lưu những trang không nằm trong
 
-import { MyModel } from "../models/Course.js";
+import { multipleMongooseToObject } from "../../util/mongoose.js";
+import { MyCourse } from "../models/Course.js";
 
 // một danh mục cụ thể nào (Home, Contact,...)
 const SiteController = {
   // [GET] /
-  async index(req, res) {
-    // const info = await MyModel.find({});
-    // info.forEach(function (item) {
-    //   res.json(item);
-    // });
-    res.render("home");
+  async index(req, res, next) {
+    try {
+      const courses = await MyCourse.find({});
+      res.render("home", { courses: multipleMongooseToObject(courses) });
+    } catch (error) {
+      res.status(404).send("Error:" + error.message);
+    }
   },
 
   // [GET] /search

@@ -5,18 +5,11 @@ import { engine } from "express-handlebars";
 import path from "path";
 import { fileURLToPath } from "url";
 import route from "./routes/index.js";
-import mongoose from "mongoose";
+import { connectToDB } from "./config/db/index.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // connect to DB
-mongoose
-  .connect("mongodb://127.0.0.1:27017/f8_education_dev")
-  .then(() => {
-    console.log("connection success");
-  })
-  .catch((err) => {
-    console.log("connection fail ", err);
-  });
+connectToDB();
 
 const app = express();
 

@@ -1,6 +1,9 @@
-@import 'variable.scss';
+@import "variable.scss";
 
 h1 {
-  color: $color-main;
   font-size: 3rem;
+}
+
+.card-course-item {
+  margin-top: 16px;
 }
